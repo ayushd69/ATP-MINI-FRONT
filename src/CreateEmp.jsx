@@ -2,7 +2,10 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+if (!BACKEND_URL) {
+  console.error("Missing VITE_BACKEND_URL in frontend/.env");
+}
 
 function CreateEmp() {
   const [loading, setLoading] = useState(false);
