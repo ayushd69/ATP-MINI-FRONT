@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+
 function CreateEmp() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -18,7 +20,7 @@ function CreateEmp() {
     try {
       setLoading(true);
       //make HTTP POST req
-      let res = await fetch("http://localhost:4000/emp-api/employees", {
+      let res = await fetch(`${BACKEND_URL}/emp-api/employees`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newEmpObj),

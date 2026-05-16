@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router'
 import axios from 'axios';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+
 function ListOfEmps() {
   const [emps, setEmps] = useState([]);
   const navigate = useNavigate()
@@ -14,13 +16,13 @@ function ListOfEmps() {
   }
 
   const deleteEmpById = async (id) => {
-    let res = await axios.delete(`http://localhost:4000/emp-api/employees/${id}`)
+    let res = await axios.delete(`${BACKEND_URL}/emp-api/employees/${id}`)
     if (res.status === 200) {
       getEmps()
     }
   }
   async function getEmps() {
-    let res = await fetch("http://localhost:4000/emp-api/employees");
+    let res = await fetch(`${BACKEND_URL}/emp-api/employees`);
     if (res.status === 200) {
       let resObj = await res.json();
       setEmps(resObj.payload);
